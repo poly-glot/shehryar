@@ -1,0 +1,124 @@
+:root {
+    --orange: #DD7122;
+    --white: #ffffff;
+    --font-light-weight: 300;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: #1e1e1e;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 80px 10%;
+}
+
+.brandedText {
+    color: var(--orange);
+}
+
+/*** Greetings Component ***/
+.greetings {
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.greetings__heading {
+    font-size: 2rem;
+    font-weight: var(--font-light-weight);
+}
+
+/*** Intro Component ***/
+.intro {
+    text-align: center;
+}
+
+.intro__subtitle {
+    font-size: 1.5rem;
+    font-weight: var(--font-light-weight);
+}
+
+.intro__title {
+    font-size: 3.6rem;
+    font-weight: var(--font-light-weight);
+}
+
+@media (min-width: 768px) {
+    .intro__title {
+        font-size: 5rem;
+    }
+}
+
+.intro__feature {
+    background-color: var(--orange);
+    border-radius: 5px;
+    display: inline-flex;
+    font-size: 1.2rem;
+    justify-content: center;
+    padding: 4px 40px;
+}
+
+@media (min-width: 768px) {
+    .intro__title {
+        font-size: 1.4rem;
+        padding: 4px 60px;
+    }
+}
+
+/*** Banner Component ***/
+.banner {
+    margin: 40px auto;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .banner {
+        margin: 80px auto;
+    }
+}
+
+.banner__text {
+    font-size: 2rem;
+    font-weight: var(--font-light-weight);
+}
+
+/*** Feature Component ***/
+.feature {
+    background-color: var(--orange);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 40px 0;
+    padding: 30px 10% 50px 10%;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .feature {
+        padding: 60px 10% 100px 10%;
+    }
+}
+
+.feature--alternative {
+    background-color: #fff;
+    color: var(--orange);
+}
+
+.feature__icon {
+    display: flex;
+    justify-content: center;
+}
+
+.feature__title {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.feature__text {
+    font-size: 1.8rem;
+}

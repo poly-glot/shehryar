@@ -1,0 +1,9 @@
+.idea/
+.env
+node_modules/
+*.log
+.DS_Store
+crash.log
+crash.*.log
+mysql.yaml
+values.local.yaml

@@ -1,0 +1,11 @@
+bases:
+  - ../../base
+
+namePrefix: local-
+
+configMapGenerator:
+  - name: database-map
+    env: config.properties
+
+patches:
+  - deployment.yaml

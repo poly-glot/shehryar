@@ -1,0 +1,13 @@
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+namespace: shehryar
+
+commonLabels:
+  app: webapp
+
+nameSuffix:
+  -v1

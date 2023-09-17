@@ -63,7 +63,7 @@ body {
 }
 
 @media (min-width: 768px) {
-    .intro__title {
+    .intro__feature {
         font-size: 1.4rem;
         padding: 4px 60px;
     }
@@ -120,5 +120,11 @@ body {
 }
 
 .feature__text {
-    font-size: 1.8rem;
+    font-size: 0.85rem;
+}
+
+@media (min-width: 768px) {
+    .feature__text {
+        font-size: 1.8rem;
+    }
 }

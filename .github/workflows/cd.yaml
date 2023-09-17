@@ -15,6 +15,15 @@ jobs:
       OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
     steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Get or create an OCIR Repository
         uses: oracle-actions/get-ocir-repository@v1.2.1
         id: get-ocir-repository
@@ -28,12 +37,10 @@ jobs:
         with:
           auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
 
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Tag and push a container image
-        id: tag-and-push-image
-        run: |
-          docker build -t shehryar-personal-site .
-          docker tag "shehryar-personal-site" "${{ steps.get-ocir-repository.outputs.repo_path }}:main"
-          docker push "${{ steps.get-ocir-repository.outputs.repo_path }}:main"
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: "${{ steps.get-ocir-repository.outputs.repo_path }}:main"

@@ -1,0 +1,139 @@
+:root {
+    --orange: #DD7122;
+    --white: #ffffff;
+}
+
+@font-face {font-family: Poppins; src: url(Poppins/Poppins-Regular.ttf);}
+@font-face {font-family: Poppins-Light; src: url(Poppins/Poppins-Light.ttf);}
+@font-face {font-family: Poppins-SemiBold; src: url(Poppins/Poppins-SemiBold.ttf);}
+@font-face {font-family: Poppins-Black; src: url(Poppins/Poppins-Black.ttf);}
+
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.body {
+    background-color: #1e1e1e;
+    padding: 80px 10%;  
+}
+
+.orangeText {
+    color: var(--orange);
+}
+
+.marginTop80 {
+    margin-top: 80px;
+}
+
+div.navbar {
+   padding: 20px 7%;
+}
+
+p, h2 {
+    margin-bottom: 0;
+    color:white;
+    font-family: "Poppins-Light", sans-serif;
+}
+
+h4.name-subtitle {
+    font-size: 1.5rem;
+    font-family: 'Poppins-Light', sans-serif;
+    color:#fff;
+}
+
+h2.name-title {
+    font-size: 5rem;
+    color: #fff;
+}
+
+div.center-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.colored-rect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--orange);
+    min-width: 28%;
+    border-radius: 5px;
+}
+
+div.colored-rect p {
+    font-size:1.4rem;
+}
+
+div.colored-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 60px 10% 100px 10%;
+    background-color: var(--orange);
+    min-width: 28%;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+
+div.colored-box p {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+div.colored-box h2 {
+    font-family: 'Poppins-SemiBold', sans-serif;
+    margin-bottom: 12px;
+}
+
+div.invertColored-box {
+    background-color: var(--white);
+}
+
+div.invertColored-box p, div.invertColored-box h2 {
+    color: var(--orange);
+}
+
+/* 
+ul.linksList {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+ul.linksList li {
+    
+}
+
+ul.linksList li a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    margin-left: 2rem;
+}
+
+ul.linksList li a.active {
+    border-bottom: 1px solid white;
+}
+
+ul.linksList li a:hover {
+    background-color: #2e2e2e;
+}
+
+@media only screen and (max-width: 600px) {
+    ul.linksList {
+        display: block;
+    }
+
+    ul.linksList li a {
+        padding: 10px 10px;
+    }
+  } */

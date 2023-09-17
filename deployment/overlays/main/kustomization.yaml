@@ -19,4 +19,4 @@ configMapGenerator:
 images:
 - name: shehryar:latest
   newName: lhr.ocir.io/lrhvckxzwf3l/shehryar-personal-site
-  newTag: 185ccca2aad97e664d417269a9cc46a0d4fd8eb7
+  newTag: e11c6e36af5e467f203b3cba07d7050ad8c1668c

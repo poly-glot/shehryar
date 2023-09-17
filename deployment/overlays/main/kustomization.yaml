@@ -1,18 +1,22 @@
-bases:
-  - ../../base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
 
 namePrefix: main-
 
 patches:
-  - deployment.yaml
-  - ingress.yaml
+- path: deployment.yaml
+- path: ingress.yaml
 
 configMapGenerator:
-  - name: database-map
-    env: config.properties
-    behavior: replace
+- behavior: replace
+  envs:
+  - config.properties
+  name: database-map
 
 images:
-  - name: shehryar:latest
-    newName: lhr.ocir.io/lrhvckxzwf3l/shehryar-personal-site
-    newTag: main
+- name: shehryar:latest
+  newName: "77777777"
+

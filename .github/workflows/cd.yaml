@@ -48,7 +48,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: "${{ steps.get-ocir-repository.outputs.repo_path }}:${{ env.GITHUB_REF_NAME }}"
+          tags: "${{ steps.get-ocir-repository.outputs.repo_path }}:${{ github.sha }}"
 
       - name: Configure Kubectl
         uses: oracle-actions/configure-kubectl-oke@v1.3.2
@@ -58,4 +58,13 @@ jobs:
 
       - name: Deploy
         run: |
-          kubectl apply -k deployment/overlays/${{ env.GITHUB_REF_NAME }}   
+          cd deployment/overlays/${{ env.GITHUB_REF_NAME }}  
+          
+          kustomize edit set image shehryar:latest=${{ steps.get-ocir-repository.outputs.repo_path }}:${{ github.sha }}
+          
+          git config --global user.name "@poly-glot-bot"
+          git config --global user.email "poly-glot-bot@users.noreply.github.com"          
+          git commit -am "feat: Update deployment image tag to ${{ github.sha }} [skip ci]"
+          git push          
+          
+          kubectl apply -k .   

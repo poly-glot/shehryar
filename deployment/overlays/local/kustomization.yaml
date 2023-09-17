@@ -1,4 +1,4 @@
-bases:
+resources:
   - ../../base
 
 namePrefix: local-
@@ -9,4 +9,4 @@ configMapGenerator:
     behavior: replace
 
 patches:
-  - deployment.yaml
+  - path: deployment.yaml

@@ -1,0 +1,18 @@
+bases:
+  - ../../base
+
+namePrefix: main-
+
+patches:
+  - deployment.yaml
+  - ingress.yaml
+
+configMapGenerator:
+  - name: database-map
+    env: config.properties
+    behavior: replace
+
+images:
+  - name: shehryar:latest
+    newName: lhr.ocir.io/lrhvckxzwf3l/shehryar-personal-site
+    newTag: main

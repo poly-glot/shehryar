@@ -6,6 +6,9 @@ resources:
 
 namespace: shehryar
 
+configMapGenerator:
+  - name: database-map
+
 commonLabels:
   app: webapp
 

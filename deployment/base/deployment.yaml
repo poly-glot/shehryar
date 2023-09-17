@@ -21,24 +21,4 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "100m"
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: phpmyadmin
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        tool: db
-    spec:
-      containers:
-        - name: phpmyadmin
-          image: "phpmyadmin:latest"
-          ports:
-            - containerPort: 80
-          env:
-            - name: PMA_HOST
-              value: "mysql-service.database.svc.cluster.local"
 

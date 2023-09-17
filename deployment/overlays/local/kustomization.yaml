@@ -6,6 +6,7 @@ namePrefix: local-
 configMapGenerator:
   - name: database-map
     env: config.properties
+    behavior: replace
 
 patches:
   - deployment.yaml

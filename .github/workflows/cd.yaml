@@ -37,10 +37,25 @@ jobs:
         with:
           auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
 
+      - name: Set GITHUB_REF_NAME
+        id: set-ref-name
+        run: echo "GITHUB_REF_NAME=$(basename ${{ github.ref }})" >> $GITHUB_ENV
+
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: "${{ steps.get-ocir-repository.outputs.repo_path }}:main"
+          tags: "${{ steps.get-ocir-repository.outputs.repo_path }}:${{ env.GITHUB_REF_NAME }}"
+
+      - name: Configure Kubectl
+        uses: oracle-actions/configure-kubectl-oke@v1.3.2
+        id: test-configure-kubectl-oke-action
+        with:
+          cluster: ${{ secrets.OCI_OKE_CLUSTER_OCID }}
+
+      - name: Deploy
+        run: |
+          kubectl apply -k deployment/overlays/${{ env.GITHUB_REF_NAME }}   

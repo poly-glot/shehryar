@@ -1,5 +1,5 @@
 resources:
-  - ../../base
+  - git@github.com:poly-glot/personal-cloud/deployment/base/?ref=main
 
 namePrefix: local-
 

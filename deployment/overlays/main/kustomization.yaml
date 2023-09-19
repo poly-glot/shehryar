@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- git@github.com:poly-glot/personal-cloud/deployment/base/?ref=main
+- https://github.com/poly-glot/personal-cloud//deployment/base/?ref=main
 
 namePrefix: main-
 
@@ -17,6 +17,6 @@ configMapGenerator:
   name: database-map
 
 images:
-- name: shehryar:latest
+- name: webapp:latest
   newName: lhr.ocir.io/lrhvckxzwf3l/shehryar-personal-site
-  newTag: 2335a864b371b034e7481c39da46ca42cd6d5fa2
+  newTag: 2ced951abad1c365a6f1a47402e05676c7d2eddf

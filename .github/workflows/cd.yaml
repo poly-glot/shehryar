@@ -1,22 +1,31 @@
-name: "Build"
+name: "Build and Deploy"
 
 on:
   push:
-    branches: ['main']
+    branches:
+      - main
+
+env:
+  OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+  OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+  OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+  OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+  OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-22.04
     name: Build & Push Docker Image
-    env:
-      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
-      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
-      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
-      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
-      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+    outputs:
+      GITHUB_REF_NAME: ${{ steps.set-ref-name.outputs.GITHUB_REF_NAME }}
+      REPO_PATH: ${{ steps.get-ocir-repository.outputs.repo_path }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
+      - name: Set GITHUB_REF_NAME
+        id: set-ref-name
+        run: echo "GITHUB_REF_NAME=$(basename ${{ github.ref }})" >> $GITHUB_ENV
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -37,11 +46,6 @@ jobs:
         with:
           auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
 
-      - name: Set GITHUB_REF_NAME
-        id: set-ref-name
-        run: echo "GITHUB_REF_NAME=$(basename ${{ github.ref }})" >> $GITHUB_ENV
-
-
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -50,6 +54,14 @@ jobs:
           push: true
           tags: "${{ steps.get-ocir-repository.outputs.repo_path }}:${{ github.sha }}"
 
+  cd:
+    needs: ci
+    runs-on: ubuntu-22.04
+    name: Deploy
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
       - name: Configure Kubectl
         uses: oracle-actions/configure-kubectl-oke@v1.3.2
         id: test-configure-kubectl-oke-action
@@ -57,14 +69,19 @@ jobs:
           cluster: ${{ secrets.OCI_OKE_CLUSTER_OCID }}
 
       - name: Deploy
+        env:
+          GITHUB_REF_NAME: ${{ needs.ci.outputs.GITHUB_REF_NAME }}
+          REPO_PATH: ${{ needs.ci.outputs.REPO_PATH }}
+          SHA: ${{ github.sha }}
         run: |
-          cd deployment/overlays/${{ env.GITHUB_REF_NAME }}  
+          cd deployment/overlays/$GITHUB_REF_NAME  
           
-          kustomize edit set image shehryar:latest=${{ steps.get-ocir-repository.outputs.repo_path }}:${{ github.sha }}
+          kustomize edit set image shehryar:latest=$REPO_PATH:$SHA
           
           git config --global user.name "@poly-glot-bot"
           git config --global user.email "poly-glot-bot@users.noreply.github.com"          
-          git commit -am "feat: Update deployment image tag to ${{ github.sha }} [skip ci]"
+          
+          git commit -am "feat: Update deployment image tag to $SHA [skip ci]"
           git push          
           
-          kubectl apply -k .   
+          kubectl apply -k .

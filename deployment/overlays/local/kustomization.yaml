@@ -1,5 +1,5 @@
 resources:
-  - git@github.com:poly-glot/personal-cloud/deployment/base/?ref=main
+  - ssh://git@github.com:poly-glot/personal-cloud/deployment/base/?ref=main
 
 namePrefix: local-
 

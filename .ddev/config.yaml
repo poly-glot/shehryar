@@ -11,7 +11,11 @@ database:
     version: "10.4"
 use_dns_when_possible: true
 composer_version: "2"
-web_environment: []
+web_environment:
+    - "DB_HOST=db"
+    - "DB_USER=db"
+    - "DB_NAME=db"
+    - "DB_PASS=ZGI="
 nodejs_version: "18"
 
 # Key features of ddev's config.yaml:
@@ -50,7 +54,7 @@ nodejs_version: "18"
 # "ddev xhprof" to enable xhprof and "ddev xhprof off" to disable it work better,
 # as leaving xhprof enabled all the time is a big performance hit.
 
-# webserver_type: nginx-fpm, apache-fpm, or nginx-gunicorn 
+# webserver_type: nginx-fpm, apache-fpm, or nginx-gunicorn
 
 # timezone: Europe/Berlin
 # This is the timezone used in the containers and by PHP;
@@ -92,7 +96,7 @@ nodejs_version: "18"
 # Please take care with this because it can cause great confusion.
 
 # upload_dirs: "custom/upload/dir"
-#    
+#
 # upload_dirs:
 #   - custom/upload/dir
 #   - ../private

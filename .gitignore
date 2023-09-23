@@ -7,3 +7,6 @@ crash.log
 crash.*.log
 mysql.yaml
 values.local.yaml
+
+.ddev/**
+!.ddev/config.yaml

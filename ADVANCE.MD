@@ -1,5 +1,11 @@
 ## Advance Topics
 
+### System requirements
+You’ll want to ensure you have the following already installed on your local machine before getting started:
+* [kubectl](https://kubernetes.io/docs/tasks/tools/)
+* [minikube](https://minikube.sigs.k8s.io/docs/start/) (optional)
+* [helm](https://helm.sh/docs/intro/install/)
+
 ### Running application on local kubernetes cluster
 
 #### Setting up kubernetes cluster (one off)

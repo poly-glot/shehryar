@@ -6,9 +6,6 @@ Shehryar personal sites & projects.
 You’ll want to ensure you have the following already installed on your local machine before getting started:
 * [Docker](https://docs.docker.com/get-docker/)
 * [ddev](https://ddev.com/get-started/)
-* [kubectl](https://kubernetes.io/docs/tasks/tools/)
-* [minikube](https://minikube.sigs.k8s.io/docs/start/) (optional)
-* [helm](https://helm.sh/docs/intro/install/)
 
 ## Setup Instructions
 ```shell
@@ -25,6 +22,6 @@ ddev get ddev/ddev-phpmyadmin
 ddev start
 ```
 
-* Local DB Credentials are stored in .ddev/.env
-
-
+### Useful information
+- Local DB Credentials are stored in [.ddev/.env](.ddev/.env)
+- [Advance kubernates setup locally](ADVANCE.MD)

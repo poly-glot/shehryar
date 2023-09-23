@@ -17,6 +17,9 @@ configMapGenerator:
   name: database-map
 
 images:
+- name: shehryar:latest
+  newName: lhr.ocir.io/lrhvckxzwf3l/shehryar-personal-site
+  newTag: 9101f32cdcb7a106b300d3f65c451ae23c9830a1
 - name: webapp:latest
   newName: lhr.ocir.io/lrhvckxzwf3l/shehryar-personal-site
   newTag: 2ced951abad1c365a6f1a47402e05676c7d2eddf

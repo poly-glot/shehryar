@@ -76,7 +76,7 @@ jobs:
         run: |
           cd deployment/overlays/$GITHUB_REF_NAME  
           
-          kustomize edit set image shehryar:latest=$REPO_PATH:$SHA
+          kustomize edit set image webapp:latest=$REPO_PATH:$SHA
           
           git config --global user.name "@poly-glot-bot"
           git config --global user.email "poly-glot-bot@users.noreply.github.com"          

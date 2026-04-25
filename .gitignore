@@ -10,3 +10,5 @@ values.local.yaml
 
 .ddev/**
 !.ddev/config.yaml
+dist/
+firebase-debug.log

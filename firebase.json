@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "site": "shehryar",
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*"],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "shehryar-api",
+          "region": "europe-west2"
+        }
+      }
+    ]
+  }
+}

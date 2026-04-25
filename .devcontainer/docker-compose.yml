@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ..:/workspace:cached
+      - ${HOME}/.claude:/home/vscode/.claude
+    command: bash /workspace/.devcontainer/app-startup.sh
+    user: vscode
+    environment:
+      APP_ENV: development
+      DB_HOST: mysql
+      DB_USER: shehryar
+      DB_PASS: shehryar
+      DB_NAME: rn_chatapp
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    # Tracks the current OCI HeatWave Always Free version (9.6 as of 2026-04).
+    # OCI Always Free doesn't allow pinning and rolls forward on maintenance
+    # cycles — bump this tag whenever a prod/local delta surfaces.
+    image: mysql:9.6
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rn_chatapp
+      MYSQL_USER: shehryar
+      MYSQL_PASSWORD: shehryar
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  mysql-data:

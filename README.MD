@@ -5,7 +5,7 @@ Shehryar's personal site plus an archived **chatapp** REST backend
 service. Firebase Hosting is used only as a thin proxy so the custom
 domain and CDN edge caching still apply.
 
-Production: <https://shehryar.junaid.guru>
+Production: <https://shehryar.dev>
 Firebase default: <https://shehryar.web.app>
 
 ## Architecture

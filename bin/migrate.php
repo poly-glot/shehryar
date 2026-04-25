@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../src/chatapp/inc/config.php';
 
+// Mirror Database.php's connection options so dev (no SSL) and prod
+// (OCI requires SSL via REQUIRE SSL on the app user) both work.
 $pdo = new PDO(
     sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', Config::dbHost(), Config::dbName()),
     Config::dbUser(),
     Config::dbPass(),
-    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],
+    [
+        PDO::ATTR_ERRMODE                      => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_SSL_CA                 => '',
+        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+    ],
 );
 
 $lock = $pdo->query("SELECT GET_LOCK('shehryar_migrate', 60)")->fetchColumn();

@@ -53,6 +53,7 @@ export const options = {
   },
   thresholds: {
     http_req_failed: ['rate<0.01'],
+    checks: ['rate>0.99'],
     'http_req_duration{endpoint:getAllUsers}': ['p(95)<500'],
     'http_req_duration{endpoint:getUserByEmail}': ['p(95)<500'],
     'http_req_duration{endpoint:login}': ['p(95)<1500'],

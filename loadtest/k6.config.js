@@ -40,6 +40,11 @@ export const options = {
       exec: 'getAllUsers',
       tags: { endpoint: 'getAllUsers' },
     },
+    getUserByEmail: {
+      ...baseScenario,
+      exec: 'getUserByEmail',
+      tags: { endpoint: 'getUserByEmail' },
+    },
   },
   thresholds: {
     http_req_failed: ['rate<0.01'],
@@ -70,3 +75,11 @@ export function getAllUsers() {
   assertOk('getAllUsers', res);
 }
 
+export function getUserByEmail() {
+  const res = http.post(
+    `${BASE}/getUserByEmail.php`,
+    JSON.stringify({ email: 'sharyarahmed4567@gmail.com' }),
+    { headers: JSON_HEADERS }
+  );
+  assertOk('getUserByEmail', res);
+}

@@ -118,9 +118,10 @@ k6 cloud login --token <token from k6.md>
 Each run:
 
 ```bash
-CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
-CHATAPP_USER_PASSWORD='Thomas' \
-  k6 cloud run loadtest/k6.config.js
+k6 cloud run \
+  -e CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
+  -e CHATAPP_USER_PASSWORD='Thomas' \
+  loadtest/k6.config.js
 ```
 
 Results stream to the Grafana k6 Cloud dashboard for project `7298441`.

@@ -179,10 +179,13 @@ without credentials.
 Run:
 
 ```bash
-CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
-CHATAPP_USER_PASSWORD=Thomas \
-  k6 inspect loadtest/k6.config.js
+k6 inspect \
+  -e CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
+  -e CHATAPP_USER_PASSWORD=Thomas \
+  loadtest/k6.config.js
 ```
+
+(k6 v1.7+ does not auto-import shell env vars; use `-e KEY=VAL` flags.)
 
 Expected: exits 0 and prints a JSON dump of `options` showing
 `cloud.projectID: 7298441`, the threshold definitions, and an empty
@@ -255,9 +258,10 @@ query work.
 Run:
 
 ```bash
-CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
-CHATAPP_USER_PASSWORD=Thomas \
-  k6 inspect loadtest/k6.config.js
+k6 inspect \
+  -e CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
+  -e CHATAPP_USER_PASSWORD=Thomas \
+  loadtest/k6.config.js
 ```
 
 Expected: exits 0 and the `scenarios` block in the dumped options now
@@ -340,9 +344,10 @@ before proceeding.
 Run:
 
 ```bash
-CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
-CHATAPP_USER_PASSWORD=Thomas \
-  k6 inspect loadtest/k6.config.js
+k6 inspect \
+  -e CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
+  -e CHATAPP_USER_PASSWORD=Thomas \
+  loadtest/k6.config.js
 ```
 
 Expected: exits 0 and the dumped `scenarios` block contains both
@@ -433,9 +438,10 @@ proceeding (k6 will measure the failure path otherwise).
 Run:
 
 ```bash
-CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
-CHATAPP_USER_PASSWORD=Thomas \
-  k6 inspect loadtest/k6.config.js
+k6 inspect \
+  -e CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
+  -e CHATAPP_USER_PASSWORD=Thomas \
+  loadtest/k6.config.js
 ```
 
 Expected: exits 0 and the dumped `scenarios` block contains
@@ -503,10 +509,13 @@ your token for convenience.
 ## Running the test
 
 ```bash
-CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
-CHATAPP_USER_PASSWORD='Thomas' \
-  k6 cloud run loadtest/k6.config.js
+k6 cloud run \
+  -e CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
+  -e CHATAPP_USER_PASSWORD='Thomas' \
+  loadtest/k6.config.js
 ```
+
+(k6 v1.7+ does not auto-import shell env vars; use `-e KEY=VAL` flags.)
 
 The CLI prints a Grafana Cloud k6 dashboard URL on start. Results stream
 there in real time and are persisted under project `7298441`.
@@ -557,9 +566,10 @@ re-run.
 Run:
 
 ```bash
-CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
-CHATAPP_USER_PASSWORD='Thomas' \
-  k6 cloud run loadtest/k6.config.js
+k6 cloud run \
+  -e CHATAPP_USER_EMAIL=sharyarahmed4567@gmail.com \
+  -e CHATAPP_USER_PASSWORD='Thomas' \
+  loadtest/k6.config.js
 ```
 
 Expected: the CLI prints a `https://...grafana.net/...` dashboard URL

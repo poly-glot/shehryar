@@ -12,3 +12,4 @@ values.local.yaml
 !.ddev/config.yaml
 dist/
 firebase-debug.log
+k6.md

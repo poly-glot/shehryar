@@ -45,6 +45,11 @@ export const options = {
       exec: 'getUserByEmail',
       tags: { endpoint: 'getUserByEmail' },
     },
+    login: {
+      ...baseScenario,
+      exec: 'login',
+      tags: { endpoint: 'login' },
+    },
   },
   thresholds: {
     http_req_failed: ['rate<0.01'],
@@ -82,4 +87,16 @@ export function getUserByEmail() {
     { headers: JSON_HEADERS }
   );
   assertOk('getUserByEmail', res);
+}
+
+export function login() {
+  const res = http.post(
+    `${BASE}/login.php`,
+    JSON.stringify({
+      Email: CHATAPP_USER_EMAIL,
+      Password: CHATAPP_USER_PASSWORD,
+    }),
+    { headers: JSON_HEADERS }
+  );
+  assertOk('login', res);
 }

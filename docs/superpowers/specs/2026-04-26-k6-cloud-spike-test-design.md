@@ -49,14 +49,17 @@ Every request asserts:
 - HTTP status is `200`
 - Response body parses as JSON and contains a `results` key
 
-Failed checks count toward the `http_req_failed` metric so a 500 or
-malformed body fails the threshold below.
+Failed checks increment the `checks` metric (not `http_req_failed`, which
+only counts HTTP-level failures). The thresholds below include both, so a
+500/network failure OR a malformed-body assertion failure breaches the
+test.
 
 ## Thresholds (test exits non-zero on breach)
 
 | Metric                                                | Threshold     | Reason                                           |
 |-------------------------------------------------------|---------------|--------------------------------------------------|
-| `http_req_failed`                                     | `rate < 0.01` | Allow 1% transient errors                        |
+| `http_req_failed`                                     | `rate < 0.01` | HTTP-level failures (non-2xx, network errors); allow 1% transient |
+| `checks`                                              | `rate > 0.99` | Application-level assertions (status 200 + JSON `results`) — catches HTTP 200 with a failure body |
 | `http_req_duration{endpoint:getAllUsers}` p(95)       | `< 500ms`     | Simple SELECT, light payload                     |
 | `http_req_duration{endpoint:getUserByEmail}` p(95)    | `< 500ms`     | Single-row indexed lookup                        |
 | `http_req_duration{endpoint:login}` p(95)             | `< 1500ms`    | Looser — Argon2id verify is CPU-bound on the server |

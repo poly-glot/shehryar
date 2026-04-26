@@ -1,4 +1,4 @@
-/* global __VU, __ITER */
+/* global __ENV, __VU, __ITER */
 import http from 'k6/http';
 import { check } from 'k6';
 

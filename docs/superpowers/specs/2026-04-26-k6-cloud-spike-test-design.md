@@ -76,7 +76,7 @@ the repo.
 
 ### Load region
 
-Single region: **`amazon:eu:london`**.
+Single region: **`amazon:gb:london`**.
 
 The Cloud Run service is hosted in London. Running load from the same
 region eliminates ~80–100ms of transatlantic RTT that would otherwise

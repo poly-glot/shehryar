@@ -130,7 +130,7 @@ export const options = {
     projectID: 7298441,
     name: 'shehryar.dev /chatapp spike',
     distribution: {
-      london: { loadZone: 'amazon:eu:london', percent: 100 },
+      london: { loadZone: 'amazon:gb:london', percent: 100 },
     },
   },
   scenarios: {
@@ -488,7 +488,7 @@ for ~3 minutes:
 
 Each scenario ramps 0 → 60 VUs over 30s, holds at 60 for 2 minutes, then
 ramps down. Peak load: 180 effective concurrent VUs from
-`amazon:eu:london`.
+`amazon:gb:london`.
 
 The test fails (exits non-zero) on:
 - `http_req_failed > 1%` overall, or

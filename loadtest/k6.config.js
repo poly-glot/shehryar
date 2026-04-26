@@ -31,7 +31,7 @@ export const options = {
     projectID: 7298441,
     name: 'shehryar.dev /chatapp spike',
     distribution: {
-      london: { loadZone: 'amazon:eu:london', percent: 100 },
+      london: { loadZone: 'amazon:gb:london', percent: 100 },
     },
   },
   scenarios: {

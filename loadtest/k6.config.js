@@ -34,7 +34,11 @@ export const options = {
     },
   },
   scenarios: {
-    // Filled in by subsequent tasks.
+    getAllUsers: {
+      ...baseScenario,
+      exec: 'getAllUsers',
+      tags: { endpoint: 'getAllUsers' },
+    },
   },
   thresholds: {
     http_req_failed: ['rate<0.01'],
@@ -59,6 +63,9 @@ function assertOk(name, res) {
   });
 }
 
-// Placeholder — replaced by scenario default exports in subsequent tasks.
-export default function () {}
+export function getAllUsers() {
+  const url = `${BASE}/getAllUsers.php?_=${__VU}-${__ITER}`;
+  const res = http.get(url);
+  assertOk('getAllUsers', res);
+}
 

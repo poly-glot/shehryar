@@ -34,19 +34,41 @@ export const options = {
       london: { loadZone: 'amazon:gb:london', percent: 100 },
     },
   },
+  // Drop `url` from the default system tags. The getAllUsers cache-buster
+  // makes every URL unique, which would explode time-series cardinality
+  // (~5k unique URLs × 10 HTTP metrics = >40k series, breaching the cloud
+  // project's 40k limit). Metrics still group by the explicit `name` tag.
+  systemTags: [
+    'proto',
+    'subproto',
+    'status',
+    'method',
+    'name',
+    'group',
+    'check',
+    'error',
+    'error_code',
+    'tls_version',
+    'scenario',
+    'service',
+    'expected_response',
+  ],
   scenarios: {
     getAllUsers: {
       ...baseScenario,
+      startTime: '0s',
       exec: 'getAllUsers',
       tags: { endpoint: 'getAllUsers' },
     },
     getUserByEmail: {
       ...baseScenario,
+      startTime: '4m',
       exec: 'getUserByEmail',
       tags: { endpoint: 'getUserByEmail' },
     },
     login: {
       ...baseScenario,
+      startTime: '8m',
       exec: 'login',
       tags: { endpoint: 'login' },
     },
@@ -77,7 +99,7 @@ function assertOk(name, res) {
 
 export function getAllUsers() {
   const url = `${BASE}/getAllUsers.php?_=${__VU}-${__ITER}`;
-  const res = http.get(url);
+  const res = http.get(url, { tags: { name: '/chatapp/getAllUsers.php' } });
   assertOk('getAllUsers', res);
 }
 
